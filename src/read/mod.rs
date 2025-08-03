@@ -29,7 +29,7 @@ pub fn read_jabcode(image: &image::RgbaImage) -> Result<Vec<u8>, ReadError> {
     }
     for (i, b) in image_buf.iter().enumerate() {
         unsafe {
-            *(*bitmap).pixel.as_mut_ptr().offset(i as isize) = std::mem::transmute_copy(b);
+            *(*bitmap).pixel.as_mut_ptr().add(i) = std::mem::transmute_copy(b);
         }
     }
 

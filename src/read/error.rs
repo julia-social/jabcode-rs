@@ -7,5 +7,5 @@ pub enum ReadError {
     #[error("JABCode Partially Decoded")]
     PartialDecode,
     #[error("JABCode Detected but Decoding failed")]
-    DecodeFailed
+    DecodeFailed,
 }

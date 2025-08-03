@@ -54,7 +54,7 @@ pub fn write_jabcode(data: &[u8], options: &WriteOptions) -> Result<image::RgbaI
     }
     for (i, c) in data.iter().enumerate() {
         unsafe {
-            *(*buf).data.as_mut_ptr().offset(i as isize) = std::mem::transmute_copy(c);
+            *(*buf).data.as_mut_ptr().add(i) = std::mem::transmute_copy(c);
         }
     }
 

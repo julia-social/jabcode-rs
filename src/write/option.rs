@@ -31,11 +31,11 @@ pub struct Version {
     pub y: i32,
 }
 
-impl Into<jabcode::jab_vector2d> for Version {
-    fn into(self) -> jabcode::jab_vector2d {
+impl From<Version> for jabcode::jab_vector2d {
+    fn from(value: Version) -> Self {
         jabcode::jab_vector2d {
-            x: self.x,
-            y: self.y,
+            x: value.x,
+            y: value.y,
         }
     }
 }
