@@ -4,4 +4,8 @@ use thiserror::Error;
 pub enum ReadError {
     #[error("Decoding JABCode failed")]
     Jab,
+    #[error("JABCode Partially Decoded")]
+    PartialDecode,
+    #[error("JABCode Detected but Decoding failed")]
+    DecodeFailed
 }

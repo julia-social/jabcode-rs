@@ -49,6 +49,11 @@ pub fn read_jabcode(image: &image::RgbaImage) -> Result<Vec<u8>, ReadError> {
 
     if decode_status == 2 {
         eprintln!("The code is only partly decoded. Some slave symbols have not been decoded and are ignored.");
+        return Err(ReadError::PartialDecode);
+    }
+
+    if decode_status == 3 {
+        eprintln!("Code found but decoding failed");
     }
 
     let buf = unsafe {
