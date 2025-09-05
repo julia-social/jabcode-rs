@@ -57,11 +57,14 @@ pub fn read_jabcode(image: &image::RgbaImage) -> Result<Vec<u8>, ReadError> {
     }
 
     let buf = unsafe {
-        let data_bytes = std::mem::transmute::<
-            &jabcode::__IncompleteArrayField<i8>,
-            &jabcode::__IncompleteArrayField<u8>,
-        >(&(*decoded).data);
-        data_bytes.as_slice((*decoded).length as usize)
+        let len = (*decoded).length as usize;
+        let ptr = (*decoded).data.as_ptr() as *const u8;
+        std::slice::from_raw_parts(ptr, len)
+        // let data_bytes = std::mem::transmute::<
+        //     &jabcode::__IncompleteArrayField<i8>,
+        //     &jabcode::__IncompleteArrayField<u8>,
+        // >(&(*decoded).data);
+        // data_bytes.as_slice((*decoded).length as usize)
     };
     let mut res = vec![0; buf.len()];
     res.copy_from_slice(buf);
